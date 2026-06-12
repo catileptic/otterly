@@ -4,7 +4,8 @@ export type SettingsCategory =
   | "files"
   | "git"
   | "misc"
-  | "hotkeys";
+  | "hotkeys"
+  | "apikeys";
 
 export type EditorSettings = {
   attachment_folder: string;
@@ -16,6 +17,7 @@ export type EditorSettings = {
   show_vault_dashboard_on_open: boolean;
   max_open_tabs: number;
   editor_max_width_ch: number;
+  api_key: string;
 };
 
 export const DEFAULT_EDITOR_SETTINGS: EditorSettings = {
@@ -28,6 +30,7 @@ export const DEFAULT_EDITOR_SETTINGS: EditorSettings = {
   show_vault_dashboard_on_open: true,
   max_open_tabs: 5,
   editor_max_width_ch: 85,
+  api_key: "CHANGE_ME"
 };
 
 export const SETTINGS_KEY = "editor" as const;

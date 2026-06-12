@@ -393,6 +393,19 @@
             "dashboard",
           );
         }}
+        on_open_openaleph_search={() => {
+          if (
+            stores.ui.sidebar_open &&
+            stores.ui.sidebar_view === "openaleph_search"
+          ) {
+            void action_registry.execute(ACTION_IDS.ui_toggle_sidebar);
+            return;
+          }
+          void action_registry.execute(
+            ACTION_IDS.ui_set_sidebar_view,
+            "openaleph_search",
+          );
+        }}
         on_open_help={() => void action_registry.execute(ACTION_IDS.help_open)}
         on_open_settings={() =>
           void action_registry.execute(ACTION_IDS.settings_open)}
@@ -416,6 +429,8 @@
                       <span class="SidebarHeader__title">Starred</span>
                     {:else if stores.ui.sidebar_view === "dashboard"}
                       <span class="SidebarHeader__title">Dashboard</span>
+                    {:else if stores.ui.sidebar_view === "openaleph_search"}
+                      <span class="SidebarHeader__title">OpenAleph Search</span>
                     {:else}
                       <button
                         type="button"
@@ -580,6 +595,14 @@
                               ACTION_IDS.vault_reindex,
                             )}
                         />
+                      </Sidebar.GroupContent>
+                    </Sidebar.Group>
+                  {/if}
+
+                  {#if stores.ui.sidebar_view === "openaleph_search"}
+                    <Sidebar.Group class="h-full">
+                      <Sidebar.GroupContent class="h-full">
+                        <h1>AAAAAAAA</h1>
                       </Sidebar.GroupContent>
                     </Sidebar.Group>
                   {/if}

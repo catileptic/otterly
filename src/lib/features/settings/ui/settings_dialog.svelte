@@ -12,6 +12,7 @@
   import GitBranchIcon from "@lucide/svelte/icons/git-branch";
   import SlidersIcon from "@lucide/svelte/icons/sliders-horizontal";
   import KeyboardIcon from "@lucide/svelte/icons/keyboard";
+  import Key from "@lucide/svelte/icons/key";
   import { HotkeysPanel } from "$lib/features/hotkey";
   import ThemeSettings from "$lib/features/settings/ui/theme_settings.svelte";
   import type {
@@ -104,6 +105,7 @@
     { id: "git", label: "Git", icon: GitBranchIcon },
     { id: "misc", label: "Misc", icon: SlidersIcon },
     { id: "hotkeys", label: "Hotkeys", icon: KeyboardIcon },
+    { id: "apikeys", label: "API Keys", icon: Key },
   ];
 
   let dialog_element = $state<HTMLElement | null>(null);
@@ -438,6 +440,31 @@
             on_reset_single={on_hotkey_reset_single}
             on_reset_all={on_hotkey_reset_all}
           />
+        {:else if active_category === "apikeys"}
+          <h2 class="SettingsDialog__content-header">API Keys</h2>
+
+          <div class="SettingsDialog__section-content">
+            <div class="SettingsDialog__row">
+              <div class="SettingsDialog__label-group">
+                <span class="SettingsDialog__label">OpenAleph API key</span>
+                <span class="SettingsDialog__description"
+                  >Used to access an OpenAleph instance</span
+                >
+              </div>
+              <Input
+                type="text"
+                value={editor_settings.api_key}
+                onchange={(e: Event & { currentTarget: HTMLInputElement }) => {
+                  update("api_key", e.currentTarget.value);
+                }}
+                oninput={(e: Event & { currentTarget: HTMLInputElement }) => {
+                  update("api_key", e.currentTarget.value);
+                }}
+                class="w-48"
+                placeholder="CHANGE_ME"
+              />
+            </div>
+          </div>
         {/if}
       </div>
     </div>
