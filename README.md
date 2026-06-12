@@ -3,6 +3,8 @@
 [![Release](https://github.com/ajkdrag/otterly/actions/workflows/release.yml/badge.svg)](https://github.com/ajkdrag/otterly/actions/workflows/release.yml)
 [![Reddit](https://img.shields.io/reddit/subreddit-subscribers/obsidianalternative?style=social&logo=reddit)](https://www.reddit.com/r/ObsidianAlternative)
 
+The `vanilla-otterly` branch preserves the state of the Otterly app at the moment of forking it.
+
 # Otterly
 
 Otterly is a local-first Markdown editor and privacy-focused note-taking app for people who want plain files, fast search, wiki-links, and desktop performance without accounts or cloud lock-in.
