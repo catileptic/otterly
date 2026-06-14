@@ -1,7 +1,7 @@
 import { ACTION_IDS } from "$lib/app/action_registry/action_ids";
 import type { ActionRegistrationInput } from "$lib/app/action_registry/action_registration_input";
 
-type SidebarView = "explorer" | "dashboard" | "starred";
+type SidebarView = "explorer" | "dashboard" | "starred" | "openaleph_search";
 
 export function register_ui_actions(input: ActionRegistrationInput) {
   const { registry, stores, services } = input;
@@ -13,6 +13,9 @@ export function register_ui_actions(input: ActionRegistrationInput) {
     }
     if (value === "dashboard") {
       return "dashboard";
+    }
+    if (value === "openaleph_search") {
+      return "openaleph_search";
     }
     return "explorer";
   }

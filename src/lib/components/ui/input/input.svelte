@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { HTMLInputAttributes, HTMLInputTypeAttribute } from "svelte/elements";
 	import { cn, type WithElementRef } from "$lib/shared/utils/component_utils.js";
+	import SearchIcon from "@lucide/svelte/icons/search";
 
 	type InputType = Exclude<HTMLInputTypeAttribute, "file">;
 
@@ -35,6 +36,23 @@
 		bind:value
 		{...restProps}
 	/>
+{:else if type === "search"}
+	<div class="Input__search">
+		<SearchIcon />
+		<input
+			bind:this={ref}
+			data-slot={dataSlot}
+			class={cn(
+				"selection:bg-primary dark:bg-input/30 selection:text-primary-foreground border-input ring-offset-background placeholder:text-muted-foreground flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 text-sm font-medium shadow-xs transition-[color,box-shadow] outline-none disabled:cursor-not-allowed disabled:opacity-50",
+				"focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+				"aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+				className
+			)}
+			type="search"
+			bind:value
+			{...restProps}
+		/>
+	</div>	
 {:else}
 	<input
 		bind:this={ref}
@@ -50,3 +68,13 @@
 		{...restProps}
 	/>
 {/if}
+
+<style>
+	.Input__search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding-inline: var(--space-3);
+    border-bottom: 1px solid var(--border);
+  }
+</style>

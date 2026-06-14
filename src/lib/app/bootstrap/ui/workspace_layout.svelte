@@ -25,6 +25,7 @@
     FoldVertical,
     Star,
   } from "@lucide/svelte";
+  import Input from "$lib/components/ui/input/input.svelte";
 
   const { stores, action_registry } = use_app_context();
 
@@ -602,7 +603,7 @@
                   {#if stores.ui.sidebar_view === "openaleph_search"}
                     <Sidebar.Group class="h-full">
                       <Sidebar.GroupContent class="h-full">
-                        <h1>AAAAAAAA</h1>
+                        <Input type="search" />
                       </Sidebar.GroupContent>
                     </Sidebar.Group>
                   {/if}
