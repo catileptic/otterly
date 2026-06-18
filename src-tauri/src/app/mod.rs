@@ -105,7 +105,8 @@ pub fn run() {
             features::git::service::git_diff,
             features::git::service::git_show_file_at_commit,
             features::git::service::git_restore_file,
-            features::git::service::git_create_tag
+            features::git::service::git_create_tag,
+            features::openaleph::service::search
         ])
         .register_uri_scheme_protocol("otterly-asset", |ctx, req| {
             shared::storage::handle_asset_request(ctx.app_handle(), req)
