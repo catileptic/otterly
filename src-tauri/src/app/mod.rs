@@ -48,6 +48,7 @@ pub fn run() {
                 )
                 .build(),
         )
+        .plugin(tauri_plugin_http::init())
         .invoke_handler(tauri::generate_handler![
             features::vault::service::open_vault,
             features::vault::service::open_vault_by_id,
