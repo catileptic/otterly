@@ -4,10 +4,11 @@
     LayoutDashboard,
     Settings,
     Star,
+    RollerCoaster,
     CircleHelp,
   } from "@lucide/svelte";
 
-  type SidebarView = "explorer" | "dashboard" | "starred";
+  type SidebarView = "explorer" | "dashboard" | "starred" | "openaleph_search";
 
   type Props = {
     sidebar_open: boolean;
@@ -17,6 +18,7 @@
     on_open_starred: () => void;
     on_open_help: () => void;
     on_open_settings: () => void;
+    on_open_openaleph_search: () => void;
   };
 
   let {
@@ -27,6 +29,7 @@
     on_open_starred,
     on_open_help,
     on_open_settings,
+    on_open_openaleph_search,
   }: Props = $props();
 </script>
 
@@ -66,6 +69,18 @@
       aria-label="Starred"
     >
       <Star class="ActivityBar__icon" />
+    </button>
+
+    <button
+      type="button"
+      class="ActivityBar__button"
+      class:ActivityBar__button--active={sidebar_open &&
+        active_view === "openaleph_search"}
+      onclick={on_open_openaleph_search}
+      aria-pressed={sidebar_open && active_view === "openaleph_search"}
+      aria-label="OpenAleph Search"
+    >
+      <RollerCoaster class="ActivityBar__icon" />
     </button>
   </div>
 

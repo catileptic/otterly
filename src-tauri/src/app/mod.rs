@@ -48,6 +48,7 @@ pub fn run() {
                 )
                 .build(),
         )
+        .plugin(tauri_plugin_http::init())
         .invoke_handler(tauri::generate_handler![
             features::vault::service::open_vault,
             features::vault::service::open_vault_by_id,
@@ -104,7 +105,9 @@ pub fn run() {
             features::git::service::git_diff,
             features::git::service::git_show_file_at_commit,
             features::git::service::git_restore_file,
-            features::git::service::git_create_tag
+            features::git::service::git_create_tag,
+            // rename to openaleph_search or smth
+            features::openaleph::service::search
         ])
         .register_uri_scheme_protocol("otterly-asset", |ctx, req| {
             shared::storage::handle_asset_request(ctx.app_handle(), req)
