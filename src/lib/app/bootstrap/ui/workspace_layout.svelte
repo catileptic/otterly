@@ -27,9 +27,13 @@
   } from "@lucide/svelte";
   import Input from "$lib/components/ui/input/input.svelte";
 
+  // hack!
+  import { tauri_invoke } from "$lib/shared/adapters/tauri_invoke";
+
   const { stores, action_registry } = use_app_context();
 
   let starred_expanded_node_ids = $state(new SvelteSet<string>());
+  let search_query = $state("");
 
   function starred_node_id(root_path: string, relative_path: string): string {
     return `starred:${root_path}:${relative_path}`;
@@ -344,6 +348,16 @@
     if (view === "dashboard") return dashboard_header_actions;
     return explorer_header_actions;
   });
+
+  // hacky openaleph search implementation
+  async function handle_openaleph_search(search_query: string) {
+    const invoke_openaleph_search = <Result,>(
+      command: string,
+      payload: Record<string, unknown>,
+    ) => tauri_invoke<Result>(command, payload);
+
+    return await invoke_openaleph_search("search", {});
+  }
 </script>
 
 {#if stores.vault.vault}
@@ -603,7 +617,15 @@
                   {#if stores.ui.sidebar_view === "openaleph_search"}
                     <Sidebar.Group class="h-full">
                       <Sidebar.GroupContent class="h-full">
-                        <Input type="search" />
+                        <Input
+                          placeholder="Vladimir Putin"
+                          bind:value={search_query}
+                          onkeydown={(e: KeyboardEvent) => {
+                            if (e.key === "Enter")
+                              handle_openaleph_search(search_query);
+                          }}
+                          type="search"
+                        />
                       </Sidebar.GroupContent>
                     </Sidebar.Group>
                   {/if}
