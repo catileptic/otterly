@@ -1,5 +1,6 @@
 pub mod git;
 pub mod notes;
+pub mod openaleph;
 pub mod search;
 pub mod settings;
 pub mod vault;
